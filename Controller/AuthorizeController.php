@@ -34,6 +34,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Twig\Environment as TwigEnvironment;
 
 /**
+ * WADA' just try
  * Controller handling basic authorization.
  *
  * @author Chris Jones <leeked@gmail.com>
