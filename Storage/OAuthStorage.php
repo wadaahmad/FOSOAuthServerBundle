@@ -120,19 +120,21 @@ class OAuthStorage implements IOAuth2RefreshTokens, IOAuth2GrantUser, IOAuth2Gra
         if (!$client instanceof ClientInterface) {
             throw new \InvalidArgumentException('Client has to implement the ClientInterface');
         }
-
+        //dd($tokenString);
         $token = $this->accessTokenManager->createToken();
         $token->setToken($tokenString);
         $token->setClient($client);
         $token->setExpiresAt($expires);
         $token->setScope($scope);
-
+        
+        
         if (null !== $data) {
+            $token->setConferenceId($data->getGenie());
             $token->setUser($data);
         }
-
+        //dd($token);
         $this->accessTokenManager->updateToken($token);
-
+        //dd($this->accessTokenManager);
         return $token;
     }
 
@@ -159,6 +161,7 @@ class OAuthStorage implements IOAuth2RefreshTokens, IOAuth2GrantUser, IOAuth2Gra
 
         $encoder = $this->encoderFactory->getEncoder($user);
         if ($encoder->isPasswordValid($user->getPassword(), $password, $user->getSalt())) {
+            //dd($user);
             return [
                 'data' => $user,
             ];
